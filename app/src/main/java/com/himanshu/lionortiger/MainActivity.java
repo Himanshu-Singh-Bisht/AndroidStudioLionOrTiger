@@ -6,7 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
+    enum Player
+    {
+        ONE , TWO
+    }
+
+    Player currentPlayer = Player.ONE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +27,27 @@ public class MainActivity extends AppCompatActivity {
     {
         ImageView tappedImageView = (ImageView) imageView;
 
-        tappedImageView.setTranslationX(-2000);
-        tappedImageView.setImageResource(R.drawable.tiger);         // to set the image of  tiger.
 
-        tappedImageView.animate().translationXBy(2000f).alpha(1).rotation(3600).setDuration(1000);          // using 3 animation (for using alpha firstly set it to 0).
+
+        if (currentPlayer ==Player.ONE)
+        {
+            tappedImageView.setTranslationX(-2000);                     // setting image view of the tapped to be at -2000dp
+            tappedImageView.setImageResource(R.drawable.lion);         // to set the image of  tiger.
+
+            tappedImageView.animate().translationXBy(2000f).alpha(1).rotation(3600).setDuration(1000);          // using 3 animation (for using alpha firstly set it to 0).
+
+            currentPlayer = Player.TWO;         // changing player after setting the image.
+        }
+        else if(currentPlayer == Player.TWO)
+        {
+            tappedImageView.setTranslationX(2000);                     // setting image view of the tapped to be at 2000dp
+            tappedImageView.setImageResource(R.drawable.tiger);         // to set the image of  tiger.
+
+            tappedImageView.animate().translationXBy(-2000f).alpha(1).rotation(3600).setDuration(1000);          // using 3 animation (for using alpha firstly set it to 0).
+
+            currentPlayer = Player.ONE;                 // changing player after setting the image.
+        }
+
 
 
     }
